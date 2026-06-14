@@ -1,0 +1,86 @@
+free:
+  active_slots:
+  - S01
+  - S05
+  - S09
+  defaults:
+    S01: price.candles_basic
+    S05: screen.sp500_core_table
+    S09: anomaly.sigma_intraday_alerts
+  limits:
+    max_cards: 3
+    max_cost: 8
+    heavy_max: 0
+basic:
+  active_slots:
+  - S01
+  - S02
+  - S05
+  - S07
+  - S09
+  defaults:
+    S01: price.candles_basic
+    S02: price.candles_enhanced
+    S05: screen.dip_finder_view
+    S07: reversal.ewo_confirmation
+    S09: anomaly.sigma_intraday_alerts
+  limits:
+    max_cards: 5
+    max_cost: 18
+    heavy_max: 0
+pro:
+  active_slots:
+  - S01
+  - S02
+  - S03
+  - S05
+  - S06
+  - S07
+  - S08
+  - S10
+  - S12
+  defaults:
+    S01: composite.score_leaderboard
+    S02: price.candles_enhanced
+    S03: macro.cross_asset_overlay
+    S05: screen.ml_rank_topN
+    S06: price.support_resistance
+    S07: reversal.magic_checklist_card
+    S08: filter.laguerre_crossover_signals
+    S10: forecast.ridge_overlay_5d_slope
+    S12: options.chain_snapshot_iv
+  limits:
+    max_cards: 9
+    max_cost: 30
+    heavy_max: 1
+black:
+  active_slots:
+  - S01
+  - S02
+  - S03
+  - S04
+  - S05
+  - S06
+  - S07
+  - S08
+  - S09
+  - S10
+  - S11
+  - S12
+  defaults:
+    S01: composite.score_leaderboard
+    S02: price.candles_enhanced
+    S03: macro.cross_asset_overlay
+    S04: risk.reversal_risk_heatmap
+    S05: screen.ml_rank_topN
+    S06: reversal.magic_full_chart
+    S07: reversal.magic_checklist_card
+    S08: filter.kalman_smooth_overlay
+    S09: risk.monte_carlo_risk_table
+    S10: forecast.bayesian_fan_credible
+    S11: regime.pca_kmeans_colored_price
+    S12: options.binary_payoff_plots
+  limits:
+    max_cards: 12
+    max_cost: 120
+    heavy_max: 2

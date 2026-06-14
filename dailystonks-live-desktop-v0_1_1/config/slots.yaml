@@ -1,0 +1,182 @@
+S01:
+  title: Market Pulse
+  allowed:
+  - narrative.what_to_watch
+  - narrative.summary
+  - price.candles_basic
+  - screen.sp500_core_table
+  - composite.score_leaderboard
+  - bt.naive_vs_model_error
+S02:
+  title: Index Price Action
+  allowed:
+  - events.calendar_proxy
+  - price.candles_basic
+  - price.candles_enhanced
+  - price.ma20_blue_line
+  - price.support_resistance
+S03:
+  title: Macro & Cross-Asset
+  allowed:
+  - xsec.tech_factor_map
+  - risk.headline_risk_dashboard
+  - risk.scenario_shock_table
+  - macro.macro_grid_corr_heatmap
+  - macro.earnings_pressure_gauge
+  - risk.systemic_risk_composite
+  - macro.fx_risk_dashboard
+  - macro.commodities_complex_dashboard
+  - macro.risk_on_off_composite
+  - rates.credit_spread_proxy
+  - rates.stock_bond_corr_regime
+  - rates.term_proxy_dashboard
+  - risk.factor_proxy_exposure
+  - multi.asset_summary
+  - dash.macro_corr_panel
+  - macro.cross_asset_overlay
+  - regime.hmm_state_timeline
+  - bt.naive_vs_model_error
+S04:
+  title: Breadth & Participation
+  allowed:
+  - breadth.percent_above_ma_stack
+  - breadth.advance_decline_proxy
+  - breadth.market_internals_dashboard
+  - breadth.new_highs_lows_52w
+  - dash.breadth_participation
+  - risk.reversal_risk_heatmap
+  - cluster.return_vol_kmeans_map
+  - screen.sp500_core_table
+S05:
+  title: Screener & Movers
+  allowed:
+  - sector.heatmap_1d
+  - screen.sp500_core_table
+  - screen.dip_finder_view
+  - screen.mega_cap_consolidation_view
+  - screen.ml_rank_topN
+  - reversal.magic_checklist_card
+S06:
+  title: Setup Spotlight
+  allowed:
+  - alerts.reversal_watchlist
+  - price.candles_enhanced
+  - reversal.magic_full_chart
+  - reversal.ewo_confirmation
+  - filter.laguerre_raw_vs_smooth
+  - filter.kalman_smooth_overlay
+  - labels.triple_barrier_visual
+S07:
+  title: Reversal & Mean Reversion
+  allowed:
+  - reversal.wofl_magic_explainer
+  - reversal.magic_full_chart
+  - reversal.magic_checklist_card
+  - reversal.ewo_confirmation
+  - reversal.risk_box_rr_stops
+  - labels.label_strip_timeline
+S08:
+  title: Trend & Momentum
+  allowed:
+  - risk.rolling_beta_panel
+  - alerts.ma200_52w_scan
+  - dash.trend_meanreversion
+  - price.candles_enhanced
+  - filter.laguerre_crossover_signals
+  - filter.adaptive_gamma_panel
+  - composite.score_leaderboard
+S09:
+  title: Volatility & Risk
+  allowed:
+  - risk.headline_risk_dashboard
+  - risk.diversifier_rankings
+  - risk.cross_asset_var_proxy
+  - risk.scenario_shock_table
+  - risk.systemic_risk_composite
+  - risk.vix_term_proxy
+  - risk.regime_nowcast
+  - options.skew_proxy_smile
+  - options.pin_levels_oi
+  - options.iv_snapshot_nearest
+  - risk.gap_risk_score
+  - alerts.volatility_breakout_watchlist
+  - risk.big_move_probability
+  - risk.volatility_regime_panel
+  - anomaly.sigma_intraday_alerts
+  - anomaly.isolationforest_overlay
+  - risk.monte_carlo_fan_1000
+  - risk.monte_carlo_outcome_hist
+  - risk.drawdown_distribution
+  - risk.monte_carlo_risk_table
+  - risk.garch_or_fat_tail_variant
+  - risk.barrier_sensitivity_robustness
+  - bt.backtrader_equity_curve_analyzers
+S10:
+  title: Forecasts & Scenarios
+  allowed:
+  - backtest.meanrev_equity_curve
+  - forecast.fan_chart_drift_vol
+  - forecast.ridge_overlay_5d_slope
+  - forecast.bayesian_fan_credible
+  - bt.naive_vs_model_error
+  - risk.monte_carlo_fan_1000
+  - risk.monte_carlo_risk_table
+S11:
+  title: Quant Lab
+  allowed:
+  - xsec.tech_factor_map
+  - breadth.percent_above_ma_stack
+  - breadth.advance_decline_proxy
+  - breadth.market_internals_dashboard
+  - rates.credit_spread_proxy
+  - rates.stock_bond_corr_regime
+  - rates.term_proxy_dashboard
+  - liquidity.amihud_illiquidity
+  - volume.volume_surprise_zscore
+  - volume.volume_regime_bands
+  - momentum.breakout_probability_heuristic
+  - momentum.ma_ribbon_compression
+  - momentum.trend_taxonomy
+  - micro.atr_percent_bands
+  - micro.open_close_edge
+  - micro.gap_vs_intraday_decomp
+  - stress.streaks_best_worst
+  - stress.drawdown_distribution
+  - stress.tail_risk_snapshot
+  - seasonality.turnaround_effects
+  - seasonality.month_profile
+  - seasonality.dow_profile
+  - risk.regime_nowcast
+  - backtest.vol_breakout_by_regime
+  - backtest.patterns_by_regime
+  - backtest.meanrev_by_regime
+  - backtest.wofl_magic_by_regime
+  - backtest.pattern_forward_stats
+  - backtest.wofl_magic_forward_stats
+  - risk.corr_matrix_heatmap
+  - port.sector_tilt_rotation
+  - port.risk_parity_lite_weights
+  - port.equal_weight_basket
+  - options.skew_proxy_smile
+  - options.pin_levels_oi
+  - options.iv_snapshot_nearest
+  - patterns.pattern_accuracy_leaderboard
+  - patterns.weekly_top10_table_thumbs
+  - patterns.pattern_spotlight
+  - regime.pca_kmeans_colored_price
+  - regime.transition_matrix_badge
+  - regime.performance_by_regime
+  - cluster.dtw_dendrogram
+  - pairs.cointegration_spread_zscore
+  - anomaly.cleaning_report_before_after
+  - xai.tree_feature_importance
+  - tuning.successive_halving_report
+  - bt.vectorbt_param_sweep_heatmap
+  - bt.multi_asset_backtest_pack
+S12:
+  title: Options Corner
+  allowed:
+  - income.dividends_snapshot
+  - options.chain_snapshot_iv
+  - options.binary_payoff_plots
+  - options.binary_pricing_panel

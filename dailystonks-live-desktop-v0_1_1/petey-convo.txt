@@ -1,0 +1,234 @@
+daily-stonks.tar.gz
+File
+ok fren, so; i've given you the whole workings of my dailystonks setup - as it stands it's designed to auto email stockmarket info to any subscribed address from a db. i would like you to take the workings of daily stonks and build me a terminal that will let me pop open a ewindow of any of the different possible charts/graphs/displays that can be had and display it onscreen, updating in realtime as often as it does per the yfinance or w/e it references, and so let me view live dtat displayed all the sme set of optins as the daily stonks has availble to deliver!
+Thought for a few seconds
+
+Aye fren — that one’s mercifully simple: the Python module is called yaml, but the package you install is PyYAML.
+
+Run this inside your active venv:
+
+python -m pip install PyYAML
+
+Then try again.
+
+But I’d recommend running it from the engine root, not from inside the dailystonks package folder.
+
+So do this:
+
+cd D:\code\daily-stonks\dailystonks\engine
+
+python -m pip install -r requirements.txt
+python -m pip install PyYAML
+
+python -m dailystonks.live_terminal --tier black --tickers spy,qqq,aapl,msft --interval 1d
+
+If you installed the package editable earlier, this should also work:
+
+dailystonks-live --tier black --tickers spy,qqq,aapl,msft --interval 1d
+
+The key bit: don’t install yaml. That usually leads to weirdness. You want:
+
+pip install PyYAML
+
+If the next missing-module error appears, the likely root cause is that the venv didn’t get the project requirements installed. This should repair the lot:
+
+cd D:\code\daily-stonks\dailystonks\engine
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install -e .
+
+Then launch with:
+
+dailystonks-live --tier black --tickers spy,qqq,aapl,msft --interval 1d
+fren, this does exactly what i requested and is all good for it but i realized that i shouda said, i'd like to be able to operate and use this entirely separate from the DailyStonks online/server based email subscription entity. i need an independent self contained program i can move over to othe devices and even share with others without providing the entire DailyStonks email sub server etc. along with it. So; therefore, could you please sort me out with just the necessary parts i need to keep in order for this terminal to work so i can make a separate copy and install it to other machines and share it as i please? i dont mind if i have to duplicate large amounts of the DailyStonks setup as long as i know i have an entirely separate entuty that i can startup and access my market as info is desired without having to employ the entire email subscription system along with it and yet know i have the email sub system of the og safely still setup and availble in it's repo as well. ok, fren - show me what to do to achieve that!
+
+Aye, this is the right correction: the live viewer should become its own portable “DailyStonks Desktop/Live” app, with only chart/report/data modules and none of the subscriber/email/server/database machinery. I’ll inspect the bundle and carve out the smallest safe standalone package, then give you the exact install/run path.
+
+I’m going to make this as a clean split rather than telling you “just delete random folders.” The essential rule is: keep the engine package, configs, S&P data, renderer, cards, and live terminal; discard dailystonks-delivery, DB, payments, FastAPI/app server, mailer, subscription tests, Docker, and web-service bits.
+
+Thought for 4m 37s
+
+Absolutely, fren — I split it into a separate portable local app: no email subscriber server, no DB, no payments, no Docker, no delivery runner.
+
+Download either:
+
+DailyStonks Live Desktop .zip
+DailyStonks Live Desktop .tar.gz
+What this standalone version contains
+dailystonks/          # chart/card/report engine
+config/               # slots + tier definitions
+data/                 # S&P/ticker universe CSV
+scripts/              # local report/live terminal helpers
+requirements.txt
+pyproject.toml
+install_windows.ps1
+run_windows.ps1
+run_windows.bat
+install_linux.sh
+run_linux.sh
+README.md
+What it deliberately does not contain
+dailystonks-delivery/
+email delivery code
+subscriber database code
+payment hooks
+FastAPI/admin server
+Docker service setup
+SMTP/subscription machinery
+
+So this can live as its own thing, for example:
+
+D:\code\dailystonks-live-desktop
+
+while your original server/email repo remains safely separate.
+
+Windows install
+
+Unzip it, open PowerShell inside the folder, then run:
+
+.\install_windows.ps1
+
+If PowerShell grumbles about execution policy:
+
+powershell -ExecutionPolicy Bypass -File .\install_windows.ps1
+
+Then launch it:
+
+.\run_windows.ps1 --tier black --tickers SPY,QQQ,AAPL,MSFT --interval 1d
+
+Or use the batch launcher:
+
+run_windows.bat --tier black --tickers SPY,QQQ,AAPL,MSFT --interval 1d
+Main commands inside the terminal
+open report
+open slot S06
+open slot S06 reversal.magic_full_chart
+open card price.candles_enhanced
+slots
+cards risk
+cards heavy
+set tickers SPY,QQQ,NVDA,TSLA
+set interval 5m
+set refresh auto
+views
+refresh all
+stop all
+exit
+Smoke test
+
+This checks the app works without live yfinance data:
+
+.\run_windows.ps1 --offline-synth --no-browser --once report
+
+I tested these successfully:
+
+card:price.candles_basic
+slot:S06
+report
+One important note
+
+Your bundled sp500_constituents.csv currently appears to be a tiny fallback file with only:
+
+AAPL
+MSFT
+SPY
+
+So the app is standalone, but broad S&P/universe/sector views will only be as broad as that CSV. I patched the standalone version so a Symbol-only CSV will not crash sector cards; it fills missing sectors as Unknown.
+
+Later, we can add a proper “refresh universe CSV” command so it can pull/update the full S&P 500 list locally.
+
+Confidence
+Area	Score
+Standalone separation	0.97
+Preserves live terminal behaviour	0.95
+Avoids original email/server dependency	0.98
+Portability to other machines	0.93
+Completeness	0.94
+ok fren, the original dailystonks software operated from a big universe csv i have - do you need access to that or can you create the proper 'refresh univere csv' by yourself?
+
+You don’t need to hand me the big CSV unless it contains your own custom universe/sector taxonomy. For a normal public-market universe, I can add a self-refreshing universe builder that pulls fresh symbols/metadata on the target machine, with your CSV still supported as an override/import path.
+
+I’m building this with two lanes: refresh for public universes, and import for your original CSV. That way you can regenerate a fresh S&P/US-listed universe anywhere, but still preserve your exact big universe if it has hand-curated rows, weird tickers, preferred shares, or custom sectors.
+
+Thought for 3m 6s
+
+Aye fren — I don’t need your big CSV unless you want this standalone app to preserve your exact original universe.
+
+I’ve made a new build that can do both:
+
+Refresh a public S&P 500 universe from the public Wikipedia constituents table.
+Build a broader US-listed universe from NasdaqTrader symbol directory files; NasdaqTrader says those symbol directory files are updated periodically through the trading day.
+Import your original big CSV and normalize it into the standalone app’s local data/sp500_constituents.csv.
+
+Download the updated version:
+
+DailyStonks Live Desktop v0.1.1 .zip
+DailyStonks Live Desktop v0.1.1 .tar.gz
+The new command
+
+After install:
+
+dailystonks-refresh-universe --source sp500
+
+That refreshes:
+
+data/sp500_constituents.csv
+
+The S&P 500 source includes Symbol, Security, GICS Sector, GICS Sub-Industry, Date added, and related columns.
+
+Import your original big CSV
+
+Use this when you want the standalone app to match the original DailyStonks universe exactly:
+
+dailystonks-refresh-universe --source custom --input "D:\path\to\your\big_universe.csv"
+
+It accepts common column names like:
+
+Symbol
+Ticker
+Name
+Company
+Security
+Sector
+GICS Sector
+Industry
+GICS Sub-Industry
+Exchange
+
+It also makes a timestamped backup before overwriting the active universe CSV.
+
+Broader US-listed universe
+dailystonks-refresh-universe --source us-listed
+
+With ETFs included:
+
+dailystonks-refresh-universe --source us-listed --include-etfs
+
+Trade-off: the broad NasdaqTrader universe has lots of symbols, but sector/industry will mostly be Unknown unless you import or enrich your own data. For sector-heavy DailyStonks cards, your original big CSV may still be better.
+
+My recommendation
+
+Use this order:
+
+# 1. Test public S&P refresh
+dailystonks-refresh-universe --source sp500 --dry-run
+
+# 2. Actually write it
+dailystonks-refresh-universe --source sp500
+
+# 3. Launch app
+stonks-live --tier black --tickers SPY,QQQ,AAPL,MSFT --interval 1d
+
+Then, when you find your original big CSV, import it:
+
+dailystonks-refresh-universe --source custom --input "D:\code\daily-stonks\path\to\your\original_universe.csv"
+
+That gives you the best of both worlds: portable standalone app, but still able to use your proper curated DailyStonks universe.
+
+Confidence
+Area	Score
+Standalone universe refresh	0.94
+Custom CSV import path	0.96
+Compatibility with existing cards	0.93
+Portability	0.96
+Completeness	0.94
