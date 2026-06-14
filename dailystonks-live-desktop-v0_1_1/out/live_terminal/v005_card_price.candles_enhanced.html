@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>DailyStonks Black Report</title>
+<style>    body{font-family:Arial,Helvetica,sans-serif;background:#0b0c10;color:#e6e6e6;margin:0;padding:16px;}
+    .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;}
+    .brand{font-size:20px;font-weight:700;}
+    .meta{opacity:0.85}
+    .grid{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:14px;}
+    .card{background:#121318;border:1px solid #20222b;border-radius:12px;padding:12px;box-shadow:0 4px 18px rgba(0,0,0,0.25);}
+    .card-header{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:6px;}
+    .card-title{font-size:16px;font-weight:700}
+    .card-key{font-size:12px;opacity:0.65}
+    .metrics{border-collapse:collapse;width:100%;margin:8px 0;}
+    .metrics td{border:1px solid #2a2d3a;padding:6px;font-size:12px;}
+    .artifact img{max-width:100%;height:auto;border-radius:10px;border:1px solid #2a2d3a;margin-top:8px;}
+    .warn{background:#2a1c1c;border:1px solid #5a2a2a;padding:8px;border-radius:10px;margin:6px 0;color:#ffb3b3;font-size:12px;}
+    ul{margin:8px 0 0 18px;}
+    li{margin:4px 0;}
+    </style>
+
+<meta http-equiv="refresh" content="900"/>
+<style>
+.livebar{position:sticky;top:0;z-index:9999;margin:-16px -16px 16px -16px;padding:10px 16px;background:#08090d;border-bottom:1px solid #2a2d3a;box-shadow:0 4px 16px rgba(0,0,0,.35);font-family:Arial,Helvetica,sans-serif;}
+.livebar strong{font-size:14px;}
+.livebar .muted{opacity:.72;font-size:12px;margin-left:8px;}
+.live-notes{margin:6px 0 0 18px;color:#ffd38a;font-size:12px;}
+</style>
+<script>
+(function(){
+  var refreshSeconds = 900;
+  var remaining = refreshSeconds;
+  function tick(){
+    var el = document.getElementById('live-countdown');
+    if (el) { el.textContent = String(remaining); }
+    remaining = Math.max(0, remaining - 1);
+  }
+  window.addEventListener('load', function(){ tick(); setInterval(tick, 1000); });
+})();
+</script>
+
+</head>
+<body>
+
+<div class="livebar">
+  <strong>DailyStonks card: Candles (Enhanced: RSI/MACD/Volume)</strong>
+  <span class="muted">view=v005 · source=card:price.candles_enhanced · generated=2026-06-14 14:44:07 · browser reload in <span id="live-countdown">900</span>s</span>
+  
+</div>
+
+  <div class="top">
+    <div class="brand">DailyStonks — Black Tier</div>
+    <div class="meta">As of 2026-06-14 · Tickers: SPY QQQ AAPL MSFT</div>
+  </div>
+  <div class="grid">
+    
+        <section class="card">
+          <div class="card-header">
+            <div class="card-title">Candles (Enhanced: RSI/MACD/Volume)</div>
+            <div class="card-key">price.candles_enhanced</div>
+          </div>
+          <div class="card-body">
+            <div class='warn'>Card failed: RuntimeError: No data returned for SPY QQQ AAPL MSFT (mapped SPY QQQ AAPL MSFT).</div>
+            <div class="summary"></div>
+            
+            
+            
+          </div>
+        </section>
+        
+  </div>
+</body>
+</html>
